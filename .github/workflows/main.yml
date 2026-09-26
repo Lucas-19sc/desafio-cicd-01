@@ -40,4 +40,4 @@ jobs:
           context: ./src
           file: ./src/Review-Filmes.Web/Dockerfile
           tags: lucascardoso1/devops-project-pro:v${{ github.run_number }}
-          //
+          // //
