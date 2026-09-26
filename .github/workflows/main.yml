@@ -21,3 +21,22 @@ jobs:
       - name: Execução do comando build
         working-directory: ./src
         run: dotnet build Review-Filmes.sln
+
+  release:
+    name: Criação de release
+    runs-on: ubuntu-latest
+    steps:
+      - name: obtendo o código do projeto
+        uses: actions/checkout@v4
+      - name: logging in docker hub
+        uses: docker/login-action@v4
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+     - name: Docker Image Build and Push
+        uses: docker/build-push-action@v7
+        with:
+          push: true
+          context: ./src
+          file: .src/src/Review-Filmes.Web/Dockerfile
+          tags: lucascardoso1/devops-project-pro:v${{github.run_number }}
