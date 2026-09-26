@@ -33,10 +33,10 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-     - name: Docker Image Build and Push
+      - name: Docker Image Build and Push
         uses: docker/build-push-action@v7
         with:
           push: true
           context: ./src
-          file: .src/src/Review-Filmes.Web/Dockerfile
-          tags: lucascardoso1/devops-project-pro:v${{github.run_number }}
+          file: ./src/Review-Filmes.Web/Dockerfile
+          tags: lucascardoso1/devops-project-pro:v${{ github.run_number }}
