@@ -31,7 +31,7 @@ jobs:
     uses: Lucas-19sc/desafio-cicd-01/.github/workflows/teste.yml@main
 
 
-release:
+ release:
     name: Criação de release
     runs-on: ubuntu-latest
     needs: [testes]
