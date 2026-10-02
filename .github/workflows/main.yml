@@ -15,7 +15,7 @@ jobs:
       - name: obtendo o código do projeto
         uses: actions/checkout@v4
       - name: Analise do Dockerfile
-        uses: hadolint/hadolint-action@v3.10
+        uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: ./src/Review-Filmes.Web/Dockerfile
 
