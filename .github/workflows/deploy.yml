@@ -1,4 +1,4 @@
-name: Deploy to EKS
+name: Test AWS Credentials
 
 on:
   push:
@@ -10,30 +10,15 @@ permissions:
   contents: read
 
 jobs:
-  deploy:
+  test-aws:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Debug OIDC claims
-        uses: github/actions-oidc-debugger@main
-        with:
-         audience: sts.amazonaws.com
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::618289386271:role/GitHubActionsRole
           aws-region: us-east-1
 
-      - name: Configure kubectl
-        run: |
-          aws eks update-kubeconfig \
-            --region us-east-1 \
-            --name eks-lab
-
-      - name: Test connection to EKS
-        run: |
-          kubectl get nodes
-          kubectl get pods -A
+      - name: Test AWS connection
+        run: aws sts get-caller-identity
