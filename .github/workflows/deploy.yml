@@ -1,5 +1,5 @@
 name: Test AWS Credentials
-
+ 
 on:
   push:
     branches:
@@ -21,4 +21,5 @@ jobs:
           aws-region: us-east-1
 
       - name: Test AWS connection
-        run: aws sts get-caller-identity
+        run: aws sts get-caller-identit
+        ##
