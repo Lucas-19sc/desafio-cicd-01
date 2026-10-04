@@ -67,11 +67,9 @@ jobs:
           category: docker-result
           sarif_file: trivy-docker-result.sarif
 
-
-    deploy-homolog:
-      needs: [release]
-      uses: Lucas-19sc/desafio-cicd-01/.github/workflows/deploy.yml@main     
-      secrets: inherit
-
+  deploy-homolog:
+    needs: [release]
+    uses: Lucas-19sc/desafio-cicd-01/.github/workflows/deploy.yml@main
+    secrets: inherit
 
 
