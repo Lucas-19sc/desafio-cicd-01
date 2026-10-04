@@ -53,7 +53,7 @@ spec:
     spec:
       containers:
         - name: reviewfilmes
-          image: lucascardoso1/devops-project-pro:v${{ github.run_number }}
+          image: lucascardoso1/devops-project-pro:latest
           env:
           - name: ASPNETCORE_HTTP_PORTS
             value: "8080"
