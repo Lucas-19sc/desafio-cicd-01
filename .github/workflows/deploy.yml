@@ -1,9 +1,8 @@
 name: Deploy to EKS
 
 on:
-  push:
-    branches:
-      - main
+  workflow_call:
+  workflow_dispatch:
 
 permissions:
   id-token: write
@@ -44,4 +43,3 @@ jobs:
         run: |
           kubectl get deployments
           kubectl get pods
-          
