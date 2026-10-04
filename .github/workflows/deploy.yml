@@ -1,5 +1,5 @@
-name: Test AWS Credentials
- 
+name: Deploy to EKS
+
 on:
   push:
     branches:
@@ -10,10 +10,13 @@ permissions:
   contents: read
 
 jobs:
-  test-aws:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -22,4 +25,23 @@ jobs:
 
       - name: Test AWS connection
         run: aws sts get-caller-identity
-        ##
+
+      - name: Configure EKS
+        run: |
+          aws eks update-kubeconfig \
+            --region us-east-1 \
+            --name eks-lab
+
+      - name: Test cluster
+        run: |
+          kubectl get nodes
+
+      - name: Deploy application
+        run: |
+          kubectl apply -f k8s/deployment.yaml
+
+      - name: Check deployment
+        run: |
+          kubectl get deployments
+          kubectl get pods
+          
