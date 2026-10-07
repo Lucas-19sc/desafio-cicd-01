@@ -6,6 +6,9 @@ on:
       environment-name:
         type: string
         required: true
+      environment-url:
+        type: string
+        required: true  
 
 permissions:
   id-token: write
