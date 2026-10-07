@@ -2,6 +2,10 @@ name: Deploy Homolog
 
 on:
   workflow_call:
+    inputs:
+      environment-name:
+        type: string
+        required: true
 
 permissions:
   id-token: write
@@ -10,6 +14,8 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment-name }}
 
     steps:
       - name: Checkout repository
@@ -26,6 +32,9 @@ jobs:
           aws eks update-kubeconfig \
             --region us-east-1 \
             --name eks-lab
+
+      - name: Update Deployment
+        run: "sed -i 's/host: homologacao.fabricioveronez.com/host: ${{ vars.BASE_URL }}/g' k8s/deployment.yaml"
 
       - name: Apply Kubernetes manifests
         run: |

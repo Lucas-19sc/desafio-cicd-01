@@ -74,5 +74,21 @@ jobs:
       contents: read
     uses: Lucas-19sc/desafio-cicd-01/.github/workflows/deploy.yml@main
     secrets: inherit
+    with:
+      environment-name: homologacao
+      environment-url: http://homologacao.lucascardoso.me
+
+  deploy-producao:
+    needs: [release]
+    permissions:
+      id-token: write
+      contents: read
+    uses: Lucas-19sc/desafio-cicd-01/.github/workflows/deploy.yml@main
+    secrets: inherit
+    with:
+      environment-name: producao
+      environment-url: http://producao.lucascardoso.me
+    
+
 
 
